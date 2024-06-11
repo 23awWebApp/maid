@@ -3,6 +3,7 @@ import { Box, VStack, HStack } from "@gluestack-ui/themed";
 import Image from "../assets/images/adaptive-icon.png";
 import { Image as RNImage } from "react-native";
 import SquareButton from "../components/SquareButton";
+import { Link } from 'expo-router';
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
           </HStack>
           <HStack space={"4xl"}>
             <SquareButton href="/page5" text="Go to Page 5" />
-            <SquareButton href="/page6" text="Go to Page 6" />
+            <SquareButton href="/tabs/tab1" text="Go to Page 6" />
           </HStack>
         </VStack>
       </Box>
