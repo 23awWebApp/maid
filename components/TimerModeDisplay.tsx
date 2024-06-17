@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     timerCountDownText: {
         fontWeight: "800",
         fontSize: 40,
-        color: "#fff",
+        color: "7a7a7a",
     },
 });

@@ -7,3 +7,4 @@ export default function Tab2() {
     <CountdownTimer />
   );
 }
+
