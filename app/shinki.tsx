@@ -19,7 +19,7 @@ export default function Shinki() {
                     <ItemButton text={"洗面台"} />
                     <ItemButton text={"ベランダ"} />
                     <ItemButton text={"玄関"} />
-                    <ItemButton text={""} sx="disabled" />
+                    <ItemButton text={""} />
                 </HStack>
                 <SaveButton href="/index" text={"次へ"} />
             </center>
