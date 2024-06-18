@@ -1,14 +1,14 @@
 import React from "react";
 import ItemButton from "@/components/ItemButton";
 import SaveButton from "@/components/SaveButton";
-import { HStack, Button, ChevronLeftIcon } from "@gluestack-ui/themed";
-import { FlexAlignType } from "react-native";
+import { HStack, Button, Divider, Box } from "@gluestack-ui/themed";
+import { Image } from "@gluestack-ui/themed";
 export default function Shinki() {
     return (
         <>
             <center>
                 <h2>掃除したいところは？</h2>
-
+                {/* <Image source="../assets/Icons/test.png" /> */}
                 <HStack justifyContent="center" flexWrap="wrap">
                     <ItemButton text={"へや"} />
                     <ItemButton text={"キッチン"} />
@@ -19,10 +19,21 @@ export default function Shinki() {
                     <ItemButton text={"洗面台"} />
                     <ItemButton text={"ベランダ"} />
                     <ItemButton text={"玄関"} />
-                    <ItemButton text={""} />
+                    <Button
+                        width={150}
+                        height={50}
+                        variant="outline"
+                        isDisabled={true}
+                        m="$5"
+                        rounded="$sm"
+                        borderColor="#fff"
+                    // isFocusVisible={false}
+                    >
+                    </Button>
                 </HStack>
-                <SaveButton href="/index" text={"次へ"} />
-            </center>
+                <Box mt="$20" />
+                <SaveButton href="/shinki/setting" text={"次へ"} />
+            </center >
         </>
     );
 }
