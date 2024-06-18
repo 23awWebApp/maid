@@ -37,7 +37,7 @@ export default function ShinkiSetting() {
                 <Select alignItems="center">
                     <SelectTrigger variant="outline" size="lg" width={238} height={60}>
                         <SelectInput placeholder="選択" />
-                        <SelectIcon mr="$3">
+                        <SelectIcon>
                             <Icon as={ChevronDownIcon} />
                         </SelectIcon>
                     </SelectTrigger>
