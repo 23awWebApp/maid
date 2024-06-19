@@ -2,12 +2,11 @@ import React from "react";
 import ItemButton from "@/components/ItemButton";
 import SaveButton from "@/components/SaveButton";
 import { HStack, Box, Text } from "@gluestack-ui/themed";
-import { useSelectedItemStore } from "@/store/selectedItemStore";
-import useBearStore from '@/store/useStore';
+import useSelectedItemStore from "@/store/useSelectedItemStore";
 
-const Shinki: React.FC = () => {
+const Shinki = () => {
     const { selectedItems, addSelectedItem, removeSelectedItem } = useSelectedItemStore();
-    const bears = useBearStore(({ bears }) => bears);
+
     const handleItemClick = (text: string) => {
         if (selectedItems.includes(text)) {
             removeSelectedItem(text);
@@ -20,8 +19,6 @@ const Shinki: React.FC = () => {
         <>
             <center>
                 <h2>掃除したいところは？</h2>
-                <Box><Text >Total sightings!!! {bears}</Text></Box>
-
                 <HStack justifyContent="center" flexWrap="wrap">
                     <ItemButton text={"へや"} onClick={() => handleItemClick("へや")} selected={selectedItems.includes("へや")} />
                     <ItemButton text={"キッチン"} onClick={() => handleItemClick("キッチン")} selected={selectedItems.includes("キッチン")} />
@@ -33,7 +30,7 @@ const Shinki: React.FC = () => {
                     <ItemButton text={"ベランダ"} onClick={() => handleItemClick("ベランダ")} selected={selectedItems.includes("ベランダ")} />
                     <ItemButton text={"玄関"} onClick={() => handleItemClick("玄関")} selected={selectedItems.includes("玄関")} />
                 </HStack>
-                <Box mt="$20" />
+                <Box mt={20} />
                 <SaveButton href="/shinki/setting" text={"次へ"} />
             </center>
         </>
