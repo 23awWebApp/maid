@@ -5,7 +5,10 @@ import { Image as RNImage } from "react-native";
 import SquareButton from "../components/SquareButton";
 import { Link } from 'expo-router';
 
+
 export default function Home() {
+
+
   return (
     <Box flex={1} backgroundColor="$black">
       {/* for the character */}
@@ -15,6 +18,7 @@ export default function Home() {
           style={{ width: "100%", height: "100%", resizeMode: "cover" }}
         />
       </Box>
+
 
       {/* for buttons */}
       <Box flex={2 / 3} justifyContent="center" alignItems="center" paddingHorizontal="$4">
@@ -36,3 +40,4 @@ export default function Home() {
     </Box>
   );
 }
+
