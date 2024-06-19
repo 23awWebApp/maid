@@ -1,17 +1,20 @@
-// selectedItemStore.ts
-import { create } from 'zustand';
-
+// useSelectedItemStore.ts
+import create from 'zustand';
 
 interface SelectedItemStore {
     selectedItems: string[];
     addSelectedItem: (item: string) => void;
-    removeSelectedItem: (item: string) => void; // Assuming 'item' is a string
+    removeSelectedItem: (item: string) => void;
 }
 
 const useSelectedItemStore = create<SelectedItemStore>((set) => ({
     selectedItems: [],
-    addSelectedItem: (item) => set((state) => ({ selectedItems: [...state.selectedItems, item] })),
-    removeSelectedItem: (item: string) => set((state) => ({ selectedItems: state.selectedItems.filter((i) => i !== item) })),
+    addSelectedItem: (item: string) => set((state) => ({
+        selectedItems: [...state.selectedItems, item],
+    })),
+    removeSelectedItem: (item: string) => set((state) => ({
+        selectedItems: state.selectedItems.filter((i) => i !== item),
+    })),
 }));
 
 export default useSelectedItemStore;

@@ -1,11 +1,13 @@
-import React from "react";
-import ItemButton from "@/components/ItemButton";
-import SaveButton from "@/components/SaveButton";
-import { HStack, Box, Text } from "@gluestack-ui/themed";
+import React from 'react';
+import { HStack, Box } from '@gluestack-ui/themed';
+import ItemButton from '@/components/ItemButton';
+import SaveButton from '@/components/SaveButton';
 import useSelectedItemStore from '@/store/useSelectedItemStore';
 
 const ShinkiSetting = () => {
-    const { selectedItems } = useSelectedItemStore();
+    const { selectedItems } = useSelectedItemStore(); // 確保這裡使用了正確的 hook
+
+    console.log(selectedItems); // 在這裡加入 console.log，確保顯示項目是否正確
 
     return (
         <>
@@ -17,7 +19,7 @@ const ShinkiSetting = () => {
                     ))}
                 </HStack>
                 <Box mt={20} />
-                <SaveButton href="/shinki/setting" text={"次へ"} />
+                <SaveButton href="/setting1" text={"次へ"} />
             </center>
         </>
     );

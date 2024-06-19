@@ -1,11 +1,16 @@
 import React from "react";
 import ItemButton from "@/components/ItemButton";
 import SaveButton from "@/components/SaveButton";
-import { HStack, Box, Text } from "@gluestack-ui/themed";
+import { HStack, Box } from "@gluestack-ui/themed";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
+import { useEffect } from 'react';
+
 
 const Shinki = () => {
     const { selectedItems, addSelectedItem, removeSelectedItem } = useSelectedItemStore();
+    useEffect(() => {
+        console.log(selectedItems); // 確保選擇的項目是否包含預期的資料
+    }, [selectedItems]);
 
     const handleItemClick = (text: string) => {
         if (selectedItems.includes(text)) {
@@ -14,7 +19,7 @@ const Shinki = () => {
             addSelectedItem(text);
         }
     };
-
+    console.log(selectedItems);
     return (
         <>
             <center>
