@@ -1,5 +1,4 @@
-// useSelectedItemStore.ts
-import create from 'zustand';
+import { create } from "zustand";
 
 interface SelectedItemStore {
     selectedItems: string[];

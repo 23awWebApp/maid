@@ -60,7 +60,7 @@ function RootLayoutNav() {
   return (
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
+        <Slot />  // This will automatically handle routing based on your directory/file structure.
       </ThemeProvider>
     </GluestackUIProvider>
   );

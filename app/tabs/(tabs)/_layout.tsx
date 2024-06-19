@@ -22,7 +22,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Expo V3",
+          title: "Expo 3",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
@@ -38,6 +38,13 @@ export default function TabLayout() {
         name="tab2"
         options={{
           title: "Tab 2",
+          tabBarIcon: ({ color }) => <TabBarIcon name="star-o" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="ShinkiSetting"
+        options={{
+          title: "Tab ３",
           tabBarIcon: ({ color }) => <TabBarIcon name="star-o" color={color} />,
         }}
       />

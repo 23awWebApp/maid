@@ -1,4 +1,3 @@
-// SaveButton.tsx
 import React from 'react';
 import { Button, ButtonText } from '@gluestack-ui/themed';
 import { Link } from 'expo-router'; // Adjust import based on actual library
@@ -24,7 +23,7 @@ const SaveButton: React.FC<SaveButtonProps> = ({ href, text }) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}
-                onPress={handleSave} // Use onPress for handling button click
+                onPress={handleSave} // Use onPress for handling button click in React Native
             >
                 <ButtonText>{text}</ButtonText>
             </Button>
