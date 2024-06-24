@@ -1,31 +1,34 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, Card, Box, ChevronRightIcon, AddIcon, SettingsIcon } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
-import useSelectedItemStore from "@/store/useSelectedItemStore";
 
 const MainPage = () => {
-  const navigation = useNavigation();
-  const { selectedItems, cleanedItems } = useSelectedItemStore();
-
   return (
     <View style={styles.container}>
       <Box style={styles.header} />
       <Box style={styles.settingsIconContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("setting")}>
-          <Icon as={SettingsIcon} />
-        </TouchableOpacity>
+        <Icon as={SettingsIcon} />
       </Box>
       <View style={styles.content}>
         <View style={styles.row}>
-          {selectedItems.map((item, index) => (
-            <Card key={index} style={styles.card}>
-              <Icon as={ChevronRightIcon} style={styles.cardIcon} />
-              <Text style={styles.cardTitle}>{item}</Text>
-              <Text style={styles.cardSubtitle}>{cleanedItems[item] ? `${cleanedItems[item]}日前 掃除しました` : "未掃除"}</Text>
-            </Card>
-          ))}
-          <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate("ShinkiSetting")}>
+          <Card style={styles.card}>
+            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>へや</Text>
+            <Text style={styles.cardSubtitle}>2日前 掃除しました</Text>
+          </Card>
+          <Card style={styles.card}>
+            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>洗濯</Text>
+            <Text style={styles.cardSubtitle}>今日 掃除しました</Text>
+          </Card>
+        </View>
+        <View style={styles.row}>
+          <Card style={styles.card}>
+            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>お風呂</Text>
+            <Text style={styles.cardSubtitle}>7日前 掃除しました</Text>
+          </Card>
+          <TouchableOpacity style={styles.addButton}>
             <Icon as={AddIcon} style={styles.addIcon} />
           </TouchableOpacity>
         </View>
