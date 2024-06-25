@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, Card, Box, ChevronRightIcon, AddIcon, SettingsIcon } from "@gluestack-ui/themed";
+import useSelectedItemStore from "@/store/useSelectedItemStore";
+import { useNavigation } from '@react-navigation/native';
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
+  const selectedItems = useSelectedItemStore((state) => state.selectedItems);
+  const daysMap = useSelectedItemStore((state) => state.daysMap);
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Box style={styles.header} />
@@ -10,30 +16,29 @@ const MainPage = () => {
         <Icon as={SettingsIcon} />
       </Box>
       <View style={styles.content}>
-        <View style={styles.row}>
-          <Card style={styles.card}>
-            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
-            <Text style={styles.cardTitle}>へや</Text>
-            <Text style={styles.cardSubtitle}>2日前 掃除しました</Text>
-          </Card>
-          <Card style={styles.card}>
-            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
-            <Text style={styles.cardTitle}>洗濯</Text>
-            <Text style={styles.cardSubtitle}>今日 掃除しました</Text>
-          </Card>
-        </View>
-        <View style={styles.row}>
-          <Card style={styles.card}>
-            <Icon as={ChevronRightIcon} style={styles.cardIcon} />
-            <Text style={styles.cardTitle}>お風呂</Text>
-            <Text style={styles.cardSubtitle}>7日前 掃除しました</Text>
-          </Card>
-          <TouchableOpacity style={styles.addButton}>
-            <Icon as={AddIcon} style={styles.addIcon} />
-          </TouchableOpacity>
-        </View>
+        {selectedItems.map((item, index) => (
+          index % 2 === 0 ? (
+            <View key={index} style={styles.row}>
+              <Card style={styles.card}>
+                <Icon as={ChevronRightIcon} style={styles.cardIcon} />
+                <Text style={styles.cardTitle}>{item}</Text>
+                <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
+              </Card>
+              {selectedItems[index + 1] && (
+                <Card style={styles.card}>
+                  <Icon as={ChevronRightIcon} style={styles.cardIcon} />
+                  <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
+                  <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
+                </Card>
+              )}
+            </View>
+          ) : null
+        ))}
+        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('index')}>
+          <Icon as={AddIcon} style={styles.addIcon} />
+        </TouchableOpacity>
       </View>
-    </View >
+    </View>
   );
 };
 
@@ -46,7 +51,6 @@ const styles = StyleSheet.create({
     height: 300,
     backgroundColor: '#b3e5fc',
   },
-
   settingsIconContainer: {
     position: 'absolute',
     top: 320,
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   card: {
-    width: 170,
+    maxWidth: 170,
     height: 196,
     padding: 16,
     justifyContent: 'center',
@@ -108,6 +112,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
+    alignSelf: 'center', // Center the button
+    marginTop: 16,
   },
   addIcon: {
     fontSize: 50,

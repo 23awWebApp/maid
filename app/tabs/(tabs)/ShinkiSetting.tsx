@@ -6,6 +6,7 @@ import useSelectedItemStore from "@/store/useSelectedItemStore";
 
 const ShinkiSetting: React.FC = () => {
     const selectedItems = useSelectedItemStore((state) => state.selectedItems);
+    const setDaysForItem = useSelectedItemStore((state) => state.setDaysForItem);
     const [selectedTab, setSelectedTab] = useState(selectedItems[0]);
     const [daysMap, setDaysMap] = useState<{ [key: string]: string | null }>({});
     const navigation = useNavigation();
@@ -20,12 +21,13 @@ const ShinkiSetting: React.FC = () => {
 
     const handleDaysChange = (value: string) => {
         setDaysMap((prev) => ({ ...prev, [selectedTab]: value }));
+        setDaysForItem(selectedTab, value);
     };
 
     const handleNext = () => {
         const allSelected = Object.values(daysMap).every((day) => day !== null);
         if (allSelected) {
-            navigation.navigate("LoadingScreen"); // Assuming you have a loading screen set up in your navigation
+            navigation.navigate("MainPage");
         } else {
             const nextTab = selectedItems.find((item) => daysMap[item] === null);
             if (nextTab) {
@@ -51,9 +53,7 @@ const ShinkiSetting: React.FC = () => {
             <Select selectedValue={daysMap[selectedTab]} onValueChange={handleDaysChange}>
                 <Select.Trigger>
                     <Select.Input placeholder="選択" />
-                    <Select.Icon as={ChevronDownIcon}>
-
-                    </Select.Icon>
+                    <Select.Icon as={ChevronDownIcon} />
                 </Select.Trigger>
                 <Select.Portal>
                     <Select.Backdrop />
