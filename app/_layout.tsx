@@ -6,23 +6,16 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
+import { useEffect } from "react";
+import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
 
 export {
-  // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
 
-// export const unstable_settings = {
-//   // Ensure that reloading on `/modal` keeps a back button present.
-//   initialRouteName: "gluestack",
-// };
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -31,8 +24,6 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  const [styleLoaded, setStyleLoaded] = useState(false);
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -43,13 +34,9 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  // useLayoutEffect(() => {
-  //   setStyleLoaded(true);
-  // }, [styleLoaded]);
-
-  // if (!loaded || !styleLoaded) {
-  //   return null;
-  // }
+  if (!loaded) {
+    return null;
+  }
 
   return <RootLayoutNav />;
 }
@@ -60,7 +47,7 @@ function RootLayoutNav() {
   return (
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />  // This will automatically handle routing based on your directory/file structure.
+        <Slot />
       </ThemeProvider>
     </GluestackUIProvider>
   );

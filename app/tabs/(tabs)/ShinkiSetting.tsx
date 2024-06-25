@@ -52,7 +52,7 @@ const ShinkiSetting: React.FC = () => {
                 <Select.Trigger>
                     <Select.Input placeholder="選択" />
                     <Select.Icon as={ChevronDownIcon}>
-                        <Icon />
+
                     </Select.Icon>
                 </Select.Trigger>
                 <Select.Portal>

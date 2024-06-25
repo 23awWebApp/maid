@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet } from "react-native";
 import ItemButton from "@/components/ItemButton";
 import { HStack, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
@@ -21,12 +22,12 @@ const Shinki = () => {
     };
 
     const handleNavigateToSetting = () => {
-        navigation.navigate("setting");
+        navigation.navigate("ShinkiSetting");
     };
 
     return (
-        <center>
-            <h2>掃除したいところは？</h2>
+        <View style={styles.container}>
+            <Text style={styles.heading}>掃除したいところは？</Text>
             <HStack justifyContent="center" flexWrap="wrap">
                 <ItemButton text={"へや"} onClick={() => handleItemClick("へや")} selected={selectedItems.includes("へや")} />
                 <ItemButton text={"キッチン"} onClick={() => handleItemClick("キッチン")} selected={selectedItems.includes("キッチン")} />
@@ -42,8 +43,21 @@ const Shinki = () => {
             <Button onPress={handleNavigateToSetting}>
                 <ButtonText>次へ</ButtonText>
             </Button>
-        </center>
+        </View>
     );
 };
 
 export default Shinki;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 5,
+    },
+    heading: {
+        fontSize: 24,
+        marginBottom: 20,
+    },
+});
