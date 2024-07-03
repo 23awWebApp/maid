@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   addIcon: {
     fontSize: 50,
-    color: '#00bcd4',
+    color: '#000',
   },
 });
 
