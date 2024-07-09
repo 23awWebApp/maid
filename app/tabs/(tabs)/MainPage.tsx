@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon, Card, Box, ChevronRightIcon, AddIcon, SettingsIcon, Image } from "@gluestack-ui/themed";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Icon, Card, Box, ChevronRightIcon, AddIcon, SettingsIcon } from "@gluestack-ui/themed";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
 import { useNavigation } from '@react-navigation/native';
 
@@ -19,10 +19,37 @@ const MainPage: React.FC = () => {
     'ベランダ': require('../../../assets/Icons/balcony.png'),
     '玄関': require('../../../assets/Icons/door.png'),
   };
+
+  const getCleanlinessPercentage = (daysAgo: number) => {
+    if (daysAgo === undefined) return 0;
+    return Math.max(100 - daysAgo * 10, 0);
+  };
+
+  const calculateAverageCleanliness = () => {
+    const totalPercentage = selectedItems.reduce((acc, item) => {
+      return acc + getCleanlinessPercentage(daysMap[item]);
+    }, 0);
+    return totalPercentage / selectedItems.length;
+  };
+
+  const averageCleanliness = calculateAverageCleanliness();
+
+  const getBackgroundImage = () => {
+    if (averageCleanliness >= 76) {
+      return require('../../../assets/images/room01.png');
+    } else if (averageCleanliness >= 51) {
+      return require('../../../assets/images/room02.png');
+    } else if (averageCleanliness >= 26) {
+      return require('../../../assets/images/room03.png');
+    } else {
+      return require('../../../assets/images/room04.png');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Box style={styles.header}>
-        <img src="../../../assets/images/room01.png" alt="" />
+        <Image source={getBackgroundImage()} style={styles.backgroundImage} />
       </Box>
       <Box style={styles.settingsIconContainer}>
         <Icon as={SettingsIcon} />
@@ -33,14 +60,14 @@ const MainPage: React.FC = () => {
             <View key={index} style={styles.row}>
               <Card style={styles.card}>
                 <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                <Image source={itemImages[item]} />
+                <Image source={itemImages[item]} style={styles.cardImage} />
                 <Text style={styles.cardTitle}>{item}</Text>
                 <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
               </Card>
               {selectedItems[index + 1] && (
                 <Card style={styles.card}>
                   <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                  <Image source={itemImages[selectedItems[index + 1]]} />
+                  <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
                   <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
                   <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
                 </Card>
@@ -66,7 +93,11 @@ const styles = StyleSheet.create({
     marginTop: -5,
     height: 270,
     width: "100%",
-    // backgroundColor: '#b3e5fc',
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   settingsIconContainer: {
     position: 'absolute',
@@ -109,7 +140,11 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: 'flex-end',
   },
-
+  cardImage: {
+    width: 64,
+    height: 64,
+    resizeMode: 'contain',
+  },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
