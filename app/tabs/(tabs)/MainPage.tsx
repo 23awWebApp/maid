@@ -46,6 +46,10 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const handleCardPress = (item: string) => {
+    navigation.navigate('TimeSettingPage', { item });
+  };
+
   return (
     <View style={styles.container}>
       <Box style={styles.header}>
@@ -58,19 +62,23 @@ const MainPage: React.FC = () => {
         {selectedItems.map((item, index) => (
           index % 2 === 0 ? (
             <View key={index} style={styles.row}>
-              <Card style={styles.card}>
-                <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                <Image source={itemImages[item]} style={styles.cardImage} />
-                <Text style={styles.cardTitle}>{item}</Text>
-                <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
-              </Card>
-              {selectedItems[index + 1] && (
+              <TouchableOpacity onPress={() => handleCardPress(item)}>
                 <Card style={styles.card}>
                   <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                  <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
-                  <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
+                  <Image source={itemImages[item]} style={styles.cardImage} />
+                  <Text style={styles.cardTitle}>{item}</Text>
+                  <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
                 </Card>
+              </TouchableOpacity>
+              {selectedItems[index + 1] && (
+                <TouchableOpacity onPress={() => handleCardPress(selectedItems[index + 1])}>
+                  <Card style={styles.card}>
+                    <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
+                    <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
+                    <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
+                    <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
+                  </Card>
+                </TouchableOpacity>
               )}
             </View>
           ) : null

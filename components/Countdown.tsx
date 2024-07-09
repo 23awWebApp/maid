@@ -88,9 +88,7 @@ export default function CountdownTimer() {
         />
       </View>
       <SaveButton text="Save" href="/tabs/tab2" />
-      <Button>
-        <ButtonText>Hello world</ButtonText>
-      </Button>
+
     </View >
   );
 }
