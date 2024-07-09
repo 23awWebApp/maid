@@ -56,7 +56,7 @@ const MainPage: React.FC = () => {
         <Image source={getBackgroundImage()} style={styles.backgroundImage} />
       </Box>
       <Box style={styles.settingsIconContainer}>
-        <Icon as={SettingsIcon} />
+        <Icon style={styles.settingsIcon} as={SettingsIcon} />
       </Box>
       <View style={styles.content}>
         {selectedItems.map((item, index) => (
@@ -115,6 +115,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     zIndex: 99,
+  },
+  settingsIcon: {
+    width: 32,
+    height: 32,
   },
   content: {
     flex: 1,
