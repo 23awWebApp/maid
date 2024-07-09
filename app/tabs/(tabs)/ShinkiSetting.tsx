@@ -50,7 +50,7 @@ const ShinkiSetting: React.FC = () => {
                 ))}
             </View>
             <Text style={styles.question}>{`${selectedTab}の掃除は何日前しましたか？`}</Text>
-            <Select selectedValue={daysMap[selectedTab]} onValueChange={handleDaysChange}>
+            <Select style={styles.bar} selectedValue={daysMap[selectedTab]} onValueChange={handleDaysChange}>
                 <Select.Trigger>
                     <Select.Input placeholder="選択" />
                     <Select.Icon as={ChevronDownIcon} />
@@ -107,12 +107,16 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         textAlign: "center",
     },
+    bar: {
+        width: "50%"
+    },
     select: {
         width: "80%",
         marginBottom: 20,
     },
     nextButton: {
         width: "80%",
+        height:60,
         marginTop: 200,
         backgroundColor: "#00A9C3",
     },

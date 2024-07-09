@@ -40,7 +40,7 @@ const Shinki = () => {
                 <ItemButton text={"玄関"} onClick={() => handleItemClick("玄関")} selected={selectedItems.includes("玄関")} />
             </HStack>
             <Box mt={20} />
-            <Button onPress={handleNavigateToSetting}>
+            <Button style={styles.next} onPress={handleNavigateToSetting}>
                 <ButtonText>次へ</ButtonText>
             </Button>
         </View>
@@ -60,4 +60,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 20,
     },
+    next: {
+        width: "80%",
+        height: 60,
+        backgroundColor:"#00A9C3",
+    },
+  
 });
