@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import CircularProgressComponent from '@/components/CircularProgress';
-import { TimerToggleButton } from '@/components/TimerToggleButton';
+import CircularProgress from 'react-native-circular-progress-indicator';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
 
 const CountdownPage: React.FC = () => {
     const route = useRoute();
@@ -37,27 +38,37 @@ const CountdownPage: React.FC = () => {
     };
 
     const formatTime = (seconds: number) => {
-        const h = Math.floor(seconds / 3600);
         const m = Math.floor((seconds % 3600) / 60);
         const s = seconds % 60;
-        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     };
 
     return (
         <View style={styles.container}>
-
             <View style={styles.timerContainer}>
+                <CircularProgress
+                    value={time}
+                    maxValue={hours * 3600 + minutes * 60}
+                    radius={150}
+                    activeStrokeWidth={10}
+                    inActiveStrokeWidth={10}
+                    activeStrokeColor={'#00BCD4'}
+                    inActiveStrokeColor={'#f0f0f0'}
+                    duration={1000}
+                    valueSuffix="s"
+                    onAnimationComplete={() => setIsRunning(false)}
+                />
                 <Text style={styles.timerText}>{formatTime(time)}</Text>
             </View>
             <View style={styles.controls}>
-                <TouchableOpacity onPress={handleReset}>
-                    <Text style={styles.controlButton}>リセット</Text>
+                <TouchableOpacity onPress={handleReset} style={styles.iconButton}>
+                    <FontAwesome name="refresh" size={25} color="#7A7A7A" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handlePauseResume}>
-                    <Text style={styles.controlButton}>{isRunning ? '一時停止' : 'Start'}</Text>
+                <TouchableOpacity onPress={handlePauseResume} style={styles.iconButton}>
+                    <FontAwesome name={isRunning ? "pause" : "play"} size={25} color="#7A7A7A" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleStop}>
-                    <Text style={styles.controlButton}>終了</Text>
+                <TouchableOpacity onPress={handleStop} style={styles.stopButton}>
+                    <Text style={styles.stopButtonText}>終了</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -72,21 +83,36 @@ const styles = StyleSheet.create({
         backgroundColor: '#E0F7FA',
     },
     timerContainer: {
-        marginBottom: 20,
+        alignItems: 'center',
+        marginBottom: 50,
     },
     timerText: {
         fontSize: 48,
         fontWeight: 'bold',
+        position: 'absolute',
+        top: '45%',
     },
     controls: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%',
+        width: '60%',
+        alignItems: 'center',
     },
-    controlButton: {
-        fontSize: 18,
-        color: '#00BCD4',
+    iconButton: {
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        padding: 10,
         marginHorizontal: 10,
+    },
+    stopButton: {
+        backgroundColor: '#00BCD4',
+        borderRadius: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+    },
+    stopButtonText: {
+        color: '#fff',
+        fontSize: 18,
     },
 });
 
