@@ -122,7 +122,10 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 25,
+    paddingTop: 25,
+    paddingBottom: 25,
+    paddingLeft: 30,
+    paddingRight: 30,
     marginTop: 50,
   },
   row: {
