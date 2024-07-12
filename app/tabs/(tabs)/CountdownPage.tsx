@@ -50,7 +50,7 @@ const CountdownPage: React.FC = () => {
                     value={time}
                     maxValue={hours * 3600 + minutes * 60}
                     radius={150}
-                    activeStrokeWidth={10}
+                    activeStrokeWidth={2}
                     inActiveStrokeWidth={10}
                     activeStrokeColor={'#00BCD4'}
                     inActiveStrokeColor={'#f0f0f0'}

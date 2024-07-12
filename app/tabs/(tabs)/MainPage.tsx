@@ -39,8 +39,10 @@ const MainPage: React.FC = () => {
       return require('../../../assets/images/room01.png');
     } else if (averageCleanliness >= 51) {
       return require('../../../assets/images/room02.png');
-    } else if (averageCleanliness >= 26) {
+    } else if (averageCleanliness >= 36) {
       return require('../../../assets/images/room03.png');
+    } else if (averageCleanliness <= 25) {
+      return require('../../../assets/images/room04.png');
     } else {
       return require('../../../assets/images/room04.png');
     }
@@ -126,6 +128,7 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingLeft: 30,
     paddingRight: 30,
+
     marginTop: 50,
   },
   row: {
