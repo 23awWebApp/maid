@@ -1,3 +1,4 @@
+import { Center } from '@gluestack-ui/themed';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -63,10 +64,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingVertical: 15,
         paddingHorizontal: 30,
+        width: 350,
+        height: 60,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     stopButtonText: {
         color: '#fff',
         fontSize: 18,
+
+
     },
 });
 

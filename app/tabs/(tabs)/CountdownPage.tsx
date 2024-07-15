@@ -79,6 +79,7 @@ const CountdownPage: React.FC = () => {
                 <View style={styles.outerCircle}></View>
                 <View style={styles.innerCircle}></View>
                 <CircularProgress
+                    showProgressValue={false}
                     value={totalTime - time}
                     maxValue={totalTime}
                     radius={140}
@@ -88,7 +89,7 @@ const CountdownPage: React.FC = () => {
                     inActiveStrokeColor={'#f0f0f05a'}
                     title={formatTime(time)}
                     titleColor={'#000'}
-                    titleStyle={{ fontWeight: 'bold', fontSize: 32 }}
+                    titleStyle={{ fontWeight: 'bold', fontSize: 48 }}
                 />
                 <Animated.View
                     style={[
