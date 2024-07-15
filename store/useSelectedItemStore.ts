@@ -14,8 +14,8 @@ const useSelectedItemStore = create<SelectedItemStore>((set) => ({
   selectedItems: [],
   daysMap: {},
   addSelectedItem: (item: string) => set((state) => ({
-    selectedItems: [...state.selectedItems, item],
-    daysMap: { ...state.daysMap, [item]: null },
+    selectedItems: state.selectedItems.includes(item) ? state.selectedItems : [...state.selectedItems, item],
+    daysMap: state.daysMap[item] === undefined ? { ...state.daysMap, [item]: null } : state.daysMap,
   })),
   removeSelectedItem: (item: string) => set((state) => {
     const { [item]: _, ...newDaysMap } = state.daysMap;

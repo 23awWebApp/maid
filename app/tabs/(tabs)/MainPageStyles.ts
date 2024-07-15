@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    minWidth: 390,
+    width: '100%',
     height: '100%',
   },
   header: {
@@ -30,7 +30,9 @@ export default StyleSheet.create({
   whiteBox: {
     flex: 1,
     width: '100%',
-    padding: 20,
+    padding: 10,
+    marginBottom: 10,
+    paddingBottom: 0,
     backgroundColor: '#fff',
     borderRadius: 15,
     shadowColor: '#000',
@@ -43,13 +45,14 @@ export default StyleSheet.create({
 
   content: {
     flex: 1,
-    padding: 10,
+    padding: 0,
     marginTop: 50,
+    marginBottom: 50,
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
+    justifyContent: 'space-evenly',
+    marginBottom: 20,
   },
   card: {
     maxWidth: 170,
@@ -110,6 +113,10 @@ export default StyleSheet.create({
     elevation: 3,
     alignSelf: 'center',
     marginTop: 16,
+  },
+  box: {
+    width: 64,
+    height: 64,
   },
 });
 

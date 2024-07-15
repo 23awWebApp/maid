@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from "@/store/useSelectedItemStore";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
@@ -7,7 +7,7 @@ import styles from './MainPageStyles';
 import { RootStackParamList } from '../types';
 import { Card, Box } from "@gluestack-ui/themed";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import CustomModal from './CustomModal'; // Import the custom modal component
+import CustomModal from './CustomModal';
 
 type MainPageNavigationProp = NavigationProp<RootStackParamList, 'MainPage'>;
 
@@ -99,7 +99,7 @@ const MainPage: React.FC = () => {
         </TouchableOpacity>
       </Box>
       <View style={styles.whiteBox}>
-        <View style={styles.content}>
+        <ScrollView contentContainerStyle={styles.content}>
           {selectedItems.map((item, index) => (
             index % 2 === 0 && (
               <View key={index} style={styles.row}>
@@ -143,7 +143,8 @@ const MainPage: React.FC = () => {
           <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Shinki' as never)}>
             <FontAwesome6 name="circle-plus" size={36} color="#0891B2" />
           </TouchableOpacity>
-        </View>
+          <Box style={styles.box} />
+        </ScrollView>
       </View>
       <CustomModal
         visible={modalVisible}
@@ -151,7 +152,7 @@ const MainPage: React.FC = () => {
         onCancel={cancelDeleteItem}
         onConfirm={confirmDeleteItem}
       />
-    </View>
+    </View >
   );
 };
 

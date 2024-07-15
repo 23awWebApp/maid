@@ -3,24 +3,25 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Select, Icon, Button, ChevronDownIcon } from "@gluestack-ui/themed";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
-import { RootStackParamList } from "../types"; // Ensure you have your types defined here
-
+import { RootStackParamList } from "../types"; 
 type ShinkiSettingNavigationProp = NavigationProp<RootStackParamList, 'ShinkiSetting'>;
 
 const ShinkiSetting: React.FC = () => {
     const selectedItems = useSelectedItemStore((state) => state.selectedItems);
+    const daysMapFromStore = useSelectedItemStore((state) => state.daysMap);
     const setDaysForItem = useSelectedItemStore((state) => state.setDaysForItem);
     const [selectedTab, setSelectedTab] = useState(selectedItems[0]);
     const [daysMap, setDaysMap] = useState<{ [key: string]: string | null }>({});
     const navigation = useNavigation<ShinkiSettingNavigationProp>();
 
     useEffect(() => {
+        // Initialize daysMap with the values from the store
         const initialDaysMap = selectedItems.reduce((acc, item) => {
-            acc[item] = null;
+            acc[item] = daysMapFromStore[item] ?? null;
             return acc;
         }, {} as { [key: string]: string | null });
         setDaysMap(initialDaysMap);
-    }, [selectedItems]);
+    }, [selectedItems, daysMapFromStore]);
 
     const handleDaysChange = (value: string) => {
         setDaysMap((prev) => ({ ...prev, [selectedTab]: value }));
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     bar: {
-        width: "50%"
+        width: "50%",
     },
     select: {
         width: "80%",
