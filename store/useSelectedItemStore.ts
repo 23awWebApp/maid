@@ -6,6 +6,8 @@ interface SelectedItemStore {
   addSelectedItem: (item: string) => void;
   removeSelectedItem: (item: string) => void;
   setDaysForItem: (item: string, days: string) => void;
+  updateCleaningTime: (item: string) => void;
+  incrementDaysMap: () => void;
 }
 
 const useSelectedItemStore = create<SelectedItemStore>((set) => ({
@@ -25,6 +27,18 @@ const useSelectedItemStore = create<SelectedItemStore>((set) => ({
   setDaysForItem: (item: string, days: string) => set((state) => ({
     daysMap: { ...state.daysMap, [item]: days },
   })),
+  updateCleaningTime: (item: string) => set((state) => ({
+    daysMap: { ...state.daysMap, [item]: "0" }, // Set the cleaning time to today
+  })),
+  incrementDaysMap: () => set((state) => {
+    const newDaysMap = { ...state.daysMap };
+    Object.keys(newDaysMap).forEach((item) => {
+      if (newDaysMap[item] !== null) {
+        newDaysMap[item] = (parseInt(newDaysMap[item] as string) + 1).toString();
+      }
+    });
+    return { daysMap: newDaysMap };
+  }),
 }));
 
 export default useSelectedItemStore;

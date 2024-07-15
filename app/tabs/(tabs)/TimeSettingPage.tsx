@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Picker } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types'; // 导入导航参数类型
+
+type TimeSettingPageNavigationProp = StackNavigationProp<RootStackParamList, 'TimeSettingPage'>;
+type TimeSettingPageRouteProp = RouteProp<RootStackParamList, 'TimeSettingPage'>;
 
 const TimeSettingPage: React.FC = () => {
-    const navigation = useNavigation();
+    const route = useRoute<TimeSettingPageRouteProp>();
+    const navigation = useNavigation<TimeSettingPageNavigationProp>();
+    const { item } = route.params;
     const [selectedHours, setSelectedHours] = useState(0);
     const [selectedMinutes, setSelectedMinutes] = useState(0);
 
     const handleStart = () => {
-        navigation.navigate('CountdownPage', { hours: selectedHours, minutes: selectedMinutes });
+        navigation.navigate('CountdownPage', { hours: selectedHours, minutes: selectedMinutes, item });
     };
 
     return (
@@ -57,15 +65,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 30,
         position: 'absolute',
-        top: '40px',
-        left: '20px',
-
+        top: 40,
+        left: 20,
     },
     pickerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 50,
-
     },
     picker: {
         height: 200,

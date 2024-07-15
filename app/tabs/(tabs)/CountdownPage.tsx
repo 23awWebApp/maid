@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Easing } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
+import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { FontAwesome } from '@expo/vector-icons';
+import useSelectedItemStore from '@/store/useSelectedItemStore';
+import styles from './CountdownPageStyles';
+import { RootStackParamList } from '../types'; // 导入导航参数类型
+
+type CountdownPageRouteProp = RouteProp<RootStackParamList, 'CountdownPage'>;
 
 const CountdownPage: React.FC = () => {
-    const route = useRoute();
+    const route = useRoute<CountdownPageRouteProp>();
     const navigation = useNavigation();
-    const { hours, minutes } = route.params;
+    const { hours, minutes, item } = route.params; // 从路由参数中提取 item
     const totalTime = hours * 3600 + minutes * 60;
     const [time, setTime] = useState(totalTime);
     const [isRunning, setIsRunning] = useState(false);
     const progressAnim = useState(new Animated.Value(0))[0];
+    const updateCleaningTime = useSelectedItemStore((state) => state.updateCleaningTime);
 
     useEffect(() => {
-        let timer;
+        let timer: NodeJS.Timeout; // 显式声明 timer 的类型
         if (isRunning && time > 0) {
             timer = setInterval(() => {
                 setTime((prevTime) => prevTime - 1);
@@ -45,6 +51,13 @@ const CountdownPage: React.FC = () => {
     };
 
     const handleStop = () => {
+        // Update the cleaning time for the item
+        updateCleaningTime(item);
+        // Navigate back to the MainPage
+        navigation.navigate('MainPage' as never); // 确保类型正确
+    };
+
+    const goBack = () => {
         navigation.goBack();
     };
 
@@ -89,7 +102,7 @@ const CountdownPage: React.FC = () => {
                 </Animated.View>
             </View>
             <View style={styles.controls}>
-                <TouchableOpacity onPress={handleStop} style={styles.iconButton}>
+                <TouchableOpacity onPress={goBack} style={styles.iconButton}>
                     <FontAwesome name="trash" size={25} color="#7A7A7A" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handlePauseResume} style={styles.iconButton}>
@@ -105,75 +118,5 @@ const CountdownPage: React.FC = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    timerContainer: {
-        alignItems: 'center',
-        marginBottom: 50,
-        position: 'relative',
-        justifyContent: 'center',
-    },
-    outerCircle: {
-        position: 'absolute',
-        width: 285,
-        height: 285,
-        borderRadius: 150,
-        borderWidth: 1,
-        borderColor: '#f0f0f0',
-        justifyContent: 'center',
-    },
-    innerCircle: {
-        position: 'absolute',
-        width: 260,
-        height: 260,
-        borderRadius: 130,
-        borderWidth: 1,
-        borderColor: '#f0f0f0',
-        justifyContent: 'center',
-    },
-    circleDecorator: {
-        position: 'absolute',
-        width: 285,
-        height: 285,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    circle: {
-        position: 'absolute',
-        width: 10,
-        height: 10,
-        borderRadius: 10,
-        backgroundColor: '#00BCD4',
-        top: 2,
-    },
-    controls: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '60%',
-        alignItems: 'center',
-    },
-    iconButton: {
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        padding: 10,
-        marginHorizontal: 10,
-    },
-    stopButton: {
-        backgroundColor: '#00BCD4',
-        borderRadius: 10,
-        paddingVertical: 15,
-        paddingHorizontal: 30,
-    },
-    stopButtonText: {
-        color: '#fff',
-        fontSize: 18,
-    },
-});
 
 export default CountdownPage;

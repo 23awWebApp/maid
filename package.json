@@ -19,6 +19,7 @@
     "@gluestack-ui/config": "latest",
     "@gluestack-ui/themed": "latest",
     "@hookform/resolvers": "^3.3.4",
+    "@react-native-picker/picker": "^2.7.7",
     "@react-navigation/drawer": "^6.6.7",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
