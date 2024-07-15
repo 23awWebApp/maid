@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Select, Icon, Button, ChevronDownIcon } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
+import { RootStackParamList } from "../types"; // Ensure you have your types defined here
+
+type ShinkiSettingNavigationProp = NavigationProp<RootStackParamList, 'ShinkiSetting'>;
 
 const ShinkiSetting: React.FC = () => {
     const selectedItems = useSelectedItemStore((state) => state.selectedItems);
     const setDaysForItem = useSelectedItemStore((state) => state.setDaysForItem);
     const [selectedTab, setSelectedTab] = useState(selectedItems[0]);
     const [daysMap, setDaysMap] = useState<{ [key: string]: string | null }>({});
-    const navigation = useNavigation();
+    const navigation = useNavigation<ShinkiSettingNavigationProp>();
 
     useEffect(() => {
         const initialDaysMap = selectedItems.reduce((acc, item) => {
@@ -68,6 +71,9 @@ const ShinkiSetting: React.FC = () => {
                         <Select.Item label="5日" value="5" />
                         <Select.Item label="6日" value="6" />
                         <Select.Item label="7日" value="7" />
+                        <Select.Item label="8日" value="8" />
+                        <Select.Item label="9日" value="9" />
+                        <Select.Item label="10日" value="10" />
                     </Select.Content>
                 </Select.Portal>
             </Select>
@@ -116,7 +122,7 @@ const styles = StyleSheet.create({
     },
     nextButton: {
         width: "80%",
-        height:60,
+        height: 60,
         marginTop: 200,
         backgroundColor: "#00A9C3",
     },

@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import ItemButton from "@/components/ItemButton";
 import { HStack, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
+import { RootStackParamList } from '../types'; // Ensure you have your types defined here
 
-const Shinki = () => {
-    const navigation = useNavigation();
-    const { selectedItems, addSelectedItem, removeSelectedItem } = useSelectedItemStore();
+type ShinkiNavigationProp = NavigationProp<RootStackParamList, 'Shinki'>;
+
+const Shinki: React.FC = () => {
+    const navigation = useNavigation<ShinkiNavigationProp>();
+    const selectedItems = useSelectedItemStore((state) => state.selectedItems);
+    const addSelectedItem = useSelectedItemStore((state) => state.addSelectedItem);
+    const removeSelectedItem = useSelectedItemStore((state) => state.removeSelectedItem);
 
     useEffect(() => {
         console.log("Shinki selectedItems:", selectedItems);
@@ -22,7 +27,7 @@ const Shinki = () => {
     };
 
     const handleNavigateToSetting = () => {
-        navigation.navigate("ShinkiSetting");
+        navigation.navigate('ShinkiSetting');
     };
 
     return (
@@ -63,7 +68,6 @@ const styles = StyleSheet.create({
     next: {
         width: "80%",
         height: 60,
-        backgroundColor:"#00A9C3",
+        backgroundColor: "#00A9C3",
     },
-  
 });

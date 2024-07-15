@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { Icon, Card, Box, ChevronRightIcon, AddIcon, SettingsIcon } from "@gluestack-ui/themed";
+import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from "@/store/useSelectedItemStore";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from './MainPageStyles';
+import { RootStackParamList } from '../types'; // 导入导航参数类型
+import { Card, Box } from "@gluestack-ui/themed";
+
+type MainPageNavigationProp = NavigationProp<RootStackParamList, 'MainPage'>;
 
 const MainPage: React.FC = () => {
   const selectedItems = useSelectedItemStore((state) => state.selectedItems) || [];
   const daysMap = useSelectedItemStore((state) => state.daysMap) || {};
   const incrementDaysMap = useSelectedItemStore((state) => state.incrementDaysMap);
-  const navigation = useNavigation();
+  const navigation = useNavigation<MainPageNavigationProp>();
   const itemImages: { [key: string]: any } = {
     'へや': require('../../../assets/Icons/room.png'),
     'キッチン': require('../../../assets/Icons/kitchen.png'),
@@ -57,7 +61,7 @@ const MainPage: React.FC = () => {
   };
 
   const handleCardPress = (item: string) => {
-    navigation.navigate('TimeSettingPage', { item });
+    navigation.navigate('TimeSettingPage', { item }); // 确保传递 item 参数
   };
 
   return (
@@ -66,38 +70,40 @@ const MainPage: React.FC = () => {
         <Image source={getBackgroundImage()} style={styles.backgroundImage} />
       </Box>
       <Box style={styles.settingsIconContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-          <Icon style={styles.settingsIcon} as={SettingsIcon} />
+        <TouchableOpacity onPress={() => navigation.navigate('Settings' as never)}>
+          <FontAwesome name="cog" size={36} color="#595959" />
         </TouchableOpacity>
       </Box>
-      <View style={styles.content}>
-        {selectedItems.map((item, index) => (
-          index % 2 === 0 && (
-            <View key={index} style={styles.row}>
-              <TouchableOpacity onPress={() => handleCardPress(item)}>
-                <Card style={styles.card}>
-                  <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                  <Image source={itemImages[item]} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>{item}</Text>
-                  <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
-                </Card>
-              </TouchableOpacity>
-              {selectedItems[index + 1] && (
-                <TouchableOpacity onPress={() => handleCardPress(selectedItems[index + 1])}>
+      <View style={styles.whiteBox}>
+        <View style={styles.content}>
+          {selectedItems.map((item, index) => (
+            index % 2 === 0 && (
+              <View key={index} style={styles.row}>
+                <TouchableOpacity onPress={() => handleCardPress(item)}>
                   <Card style={styles.card}>
-                    <Box style={styles.cardIcon}><Icon as={ChevronRightIcon} style={styles.cardChevronRight} /></Box>
-                    <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
-                    <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
-                    <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
+                    <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
+                    <Image source={itemImages[item]} style={styles.cardImage} />
+                    <Text style={styles.cardTitle}>{item}</Text>
+                    <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
                   </Card>
                 </TouchableOpacity>
-              )}
-            </View>
-          )
-        ))}
-        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('index')}>
-          <Icon as={AddIcon} style={styles.addIcon} />
-        </TouchableOpacity>
+                {selectedItems[index + 1] && (
+                  <TouchableOpacity onPress={() => handleCardPress(selectedItems[index + 1])}>
+                    <Card style={styles.card}>
+                      <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
+                      <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
+                      <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
+                      <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
+                    </Card>
+                  </TouchableOpacity>
+                )}
+              </View>
+            )
+          ))}
+          <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Shinki' as never)}>
+            <FontAwesome6 name="circle-plus" size={36} color="#0891B2" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

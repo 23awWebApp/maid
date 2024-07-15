@@ -4,16 +4,17 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    width: 390,
+    minWidth: 390,
+    height: '100%',
   },
   header: {
-    marginTop: -5,
+    marginTop: 0,
     height: 270,
     width: "100%",
   },
   backgroundImage: {
     width: '100%',
-    height: '100%',
+    height: '105%',
     resizeMode: 'cover',
   },
   settingsIconContainer: {
@@ -25,16 +26,24 @@ export default StyleSheet.create({
     padding: 8,
     zIndex: 99,
   },
-  settingsIcon: {
-    width: 32,
-    height: 32,
+
+  whiteBox: {
+    flex: 1,
+    width: '100%',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+    zIndex: 1,
   },
+
   content: {
     flex: 1,
-    paddingTop: 25,
-    paddingBottom: 25,
-    paddingLeft: 30,
-    paddingRight: 30,
+    padding: 10,
     marginTop: 50,
   },
   row: {
@@ -57,7 +66,7 @@ export default StyleSheet.create({
     elevation: 3,
   },
   cardChevronRight: {
-    fontSize: 24,
+    fontSize: 22,
     color: '#00bcd4',
   },
   cardIcon: {
@@ -85,7 +94,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#00bcd4',
+    borderColor: '#fff',
     borderRadius: 8,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -95,10 +104,6 @@ export default StyleSheet.create({
     elevation: 3,
     alignSelf: 'center',
     marginTop: 16,
-  },
-  addIcon: {
-    fontSize: 50,
-    color: '#00bcd4',
   },
 });
 

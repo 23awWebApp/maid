@@ -1,6 +1,8 @@
-// types.ts
 export type RootStackParamList = {
     MainPage: undefined;
     TimeSettingPage: { item: string };
     CountdownPage: { hours: number; minutes: number; item: string };
+    Settings: undefined;
+    ShinkiSetting: undefined;
+    Shinki: undefined;
 };
