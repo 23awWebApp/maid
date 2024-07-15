@@ -65,6 +65,12 @@ export default StyleSheet.create({
     shadowRadius: 8,
     elevation: 3,
   },
+  deleteIcon: {
+    zIndex: 99,
+    position: 'absolute',
+    top: -5,
+    left: -5,
+  },
   cardChevronRight: {
     fontSize: 22,
     color: '#00bcd4',

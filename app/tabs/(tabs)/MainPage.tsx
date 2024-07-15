@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from "@/store/useSelectedItemStore";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from './MainPageStyles';
-import { RootStackParamList } from '../types'; // 导入导航参数类型
+import { RootStackParamList } from '../types';
 import { Card, Box } from "@gluestack-ui/themed";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import CustomModal from './CustomModal'; // Import the custom modal component
 
 type MainPageNavigationProp = NavigationProp<RootStackParamList, 'MainPage'>;
 
 const MainPage: React.FC = () => {
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   const selectedItems = useSelectedItemStore((state) => state.selectedItems) || [];
   const daysMap = useSelectedItemStore((state) => state.daysMap) || {};
   const incrementDaysMap = useSelectedItemStore((state) => state.incrementDaysMap);
+  const removeSelectedItem = useSelectedItemStore((state) => state.removeSelectedItem);
   const navigation = useNavigation<MainPageNavigationProp>();
   const itemImages: { [key: string]: any } = {
     'へや': require('../../../assets/Icons/room.png'),
@@ -29,7 +35,7 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       incrementDaysMap();
-    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+    }, 24 * 60 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, [incrementDaysMap]);
@@ -61,7 +67,25 @@ const MainPage: React.FC = () => {
   };
 
   const handleCardPress = (item: string) => {
-    navigation.navigate('TimeSettingPage', { item }); // 确保传递 item 参数
+    navigation.navigate('TimeSettingPage', { item });
+  };
+
+  const handleDeleteItem = (item: string) => {
+    setItemToDelete(item);
+    setModalVisible(true);
+  };
+
+  const confirmDeleteItem = () => {
+    if (itemToDelete) {
+      removeSelectedItem(itemToDelete);
+      setItemToDelete(null);
+    }
+    setModalVisible(false);
+  };
+
+  const cancelDeleteItem = () => {
+    setItemToDelete(null);
+    setModalVisible(false);
   };
 
   return (
@@ -70,7 +94,7 @@ const MainPage: React.FC = () => {
         <Image source={getBackgroundImage()} style={styles.backgroundImage} />
       </Box>
       <Box style={styles.settingsIconContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Settings' as never)}>
+        <TouchableOpacity onPress={() => setDeleteMode(!deleteMode)}>
           <FontAwesome name="cog" size={36} color="#595959" />
         </TouchableOpacity>
       </Box>
@@ -81,6 +105,14 @@ const MainPage: React.FC = () => {
               <View key={index} style={styles.row}>
                 <TouchableOpacity onPress={() => handleCardPress(item)}>
                   <Card style={styles.card}>
+                    {deleteMode && (
+                      <TouchableOpacity
+                        style={styles.deleteIcon}
+                        onPress={() => handleDeleteItem(item)}
+                      >
+                        <AntDesign name="minuscircle" size={24} color="#F44F4F" />
+                      </TouchableOpacity>
+                    )}
                     <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
                     <Image source={itemImages[item]} style={styles.cardImage} />
                     <Text style={styles.cardTitle}>{item}</Text>
@@ -90,6 +122,14 @@ const MainPage: React.FC = () => {
                 {selectedItems[index + 1] && (
                   <TouchableOpacity onPress={() => handleCardPress(selectedItems[index + 1])}>
                     <Card style={styles.card}>
+                      {deleteMode && (
+                        <TouchableOpacity
+                          style={styles.deleteIcon}
+                          onPress={() => handleDeleteItem(selectedItems[index + 1])}
+                        >
+                          <AntDesign name="minuscircle" size={24} color="#F44F4F" />
+                        </TouchableOpacity>
+                      )}
                       <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
                       <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
                       <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
@@ -105,6 +145,12 @@ const MainPage: React.FC = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <CustomModal
+        visible={modalVisible}
+        message="この項目を削除します。よろしいですか？"
+        onCancel={cancelDeleteItem}
+        onConfirm={confirmDeleteItem}
+      />
     </View>
   );
 };
