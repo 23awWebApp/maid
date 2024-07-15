@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link, useRouter } from 'expo-router';
-
 export default function Home() {
   const router = useRouter();
 

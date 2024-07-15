@@ -5,14 +5,15 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 import { FontAwesome } from '@expo/vector-icons';
 import useSelectedItemStore from '@/store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
-import { RootStackParamList } from '../types'; // 导入导航参数类型
+import { RootStackParamList } from '../types';
+import * as Font from 'expo-font';
 
 type CountdownPageRouteProp = RouteProp<RootStackParamList, 'CountdownPage'>;
 
 const CountdownPage: React.FC = () => {
     const route = useRoute<CountdownPageRouteProp>();
     const navigation = useNavigation();
-    const { hours, minutes, item } = route.params; // 从路由参数中提取 item
+    const { hours, minutes, item } = route.params;
     const totalTime = hours * 3600 + minutes * 60;
     const [time, setTime] = useState(totalTime);
     const [isRunning, setIsRunning] = useState(false);
@@ -20,7 +21,7 @@ const CountdownPage: React.FC = () => {
     const updateCleaningTime = useSelectedItemStore((state) => state.updateCleaningTime);
 
     useEffect(() => {
-        let timer: NodeJS.Timeout; // 显式声明 timer 的类型
+        let timer: NodeJS.Timeout;
         if (isRunning && time > 0) {
             timer = setInterval(() => {
                 setTime((prevTime) => prevTime - 1);
@@ -54,7 +55,7 @@ const CountdownPage: React.FC = () => {
         // Update the cleaning time for the item
         updateCleaningTime(item);
         // Navigate back to the MainPage
-        navigation.navigate('MainPage' as never); // 确保类型正确
+        navigation.navigate('MainPage' as never);
     };
 
     const goBack = () => {
@@ -89,7 +90,7 @@ const CountdownPage: React.FC = () => {
                     inActiveStrokeColor={'#f0f0f05a'}
                     title={formatTime(time)}
                     titleColor={'#000'}
-                    titleStyle={{ fontWeight: 'bold', fontSize: 48 }}
+                    titleStyle={{ fontFamily: 'Manrope', fontWeight: 'bold', fontSize: 48 }}
                 />
                 <Animated.View
                     style={[
