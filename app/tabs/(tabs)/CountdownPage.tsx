@@ -6,7 +6,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import useSelectedItemStore from '@/store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
 import { RootStackParamList } from '../types';
-import * as Font from 'expo-font';
 
 type CountdownPageRouteProp = RouteProp<RootStackParamList, 'CountdownPage'>;
 
