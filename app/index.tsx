@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useRouter } from 'expo-router';
+import { View, Text } from 'react-native';
+
 export default function Home() {
   const router = useRouter();
 
@@ -13,7 +15,7 @@ export default function Home() {
 
   return (
     <>
-      welcome to maid app!
+      <Text>welcome to maid app!</Text>
     </>
   );
 }

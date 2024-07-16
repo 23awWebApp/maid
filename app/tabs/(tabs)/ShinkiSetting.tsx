@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Select, Icon, Button, ChevronDownIcon } from "@gluestack-ui/themed";
+import { Select, Icon, Button, ButtonText, ChevronDownIcon } from "@gluestack-ui/themed";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
 import { RootStackParamList } from "../types"; 
@@ -79,7 +79,7 @@ const ShinkiSetting: React.FC = () => {
                 </Select.Portal>
             </Select>
             <Button style={styles.nextButton} onPress={handleNext}>
-                <Button.Text>次へ</Button.Text>
+                <ButtonText>次へ</ButtonText>
             </Button>
         </View>
     );
