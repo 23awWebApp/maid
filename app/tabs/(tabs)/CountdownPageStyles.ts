@@ -62,8 +62,6 @@ const styles = StyleSheet.create({
     stopButton: {
         backgroundColor: '#00BCD4',
         borderRadius: 10,
-        paddingVertical: 15,
-        paddingHorizontal: 30,
         width: 350,
         height: 60,
         marginTop: 20,

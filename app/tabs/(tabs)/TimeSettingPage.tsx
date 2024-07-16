@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
+import { Box } from "@gluestack-ui/themed";
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../types'; // 导入导航参数类型
+import { RootStackParamList } from '../types';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 type TimeSettingPageNavigationProp = StackNavigationProp<RootStackParamList, 'TimeSettingPage'>;
 type TimeSettingPageRouteProp = RouteProp<RootStackParamList, 'TimeSettingPage'>;
+
 
 const TimeSettingPage: React.FC = () => {
     const route = useRoute<TimeSettingPageRouteProp>();
@@ -18,55 +21,84 @@ const TimeSettingPage: React.FC = () => {
     const handleStart = () => {
         navigation.navigate('CountdownPage', { hours: selectedHours, minutes: selectedMinutes, item });
     };
-
+    const goBack = () => {
+        navigation.goBack();
+    };
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>タイマー</Text>
-            <View style={styles.pickerContainer}>
-                <Picker
-                    selectedValue={selectedHours}
-                    style={styles.picker}
-                    itemStyle={styles.pickerItem}
-                    onValueChange={(itemValue) => setSelectedHours(itemValue)}
-                >
-                    {[...Array(24).keys()].map((hour) => (
-                        <Picker.Item key={hour} label={`${hour}`} value={hour} />
-                    ))}
-                </Picker>
-                <Text style={styles.pickerLabel}>時</Text>
-                <Picker
-                    selectedValue={selectedMinutes}
-                    style={styles.picker}
-                    itemStyle={styles.pickerItem}
-                    onValueChange={(itemValue) => setSelectedMinutes(itemValue)}
-                >
-                    {[...Array(60).keys()].map((minute) => (
-                        <Picker.Item key={minute} label={`${minute}`} value={minute} />
-                    ))}
-                </Picker>
-                <Text style={styles.pickerLabel}>分</Text>
+            <View style={styles.topWrap}>
+                <TouchableOpacity onPress={goBack} style={styles.iconButton}>
+                    <AntDesign name="left" size={25} color="#7A7A7A" />
+                </TouchableOpacity>
+                <Text style={styles.title}>タイマー</Text>
+                <Box style={styles.box} />
             </View>
-            <TouchableOpacity style={styles.startButton} onPress={handleStart}>
-                <Text style={styles.startButtonText}>スタート</Text>
-            </TouchableOpacity>
-        </View>
+            <View style={styles.containWrap}>
+                <View style={styles.pickerContainer}>
+                    <Picker
+                        selectedValue={selectedHours}
+                        style={styles.picker}
+                        itemStyle={styles.pickerItem}
+                        onValueChange={(itemValue) => setSelectedHours(itemValue)}
+                    >
+                        {[...Array(24).keys()].map((hour) => (
+                            <Picker.Item key={hour} label={`${hour}`} value={hour} />
+                        ))}
+                    </Picker>
+                    <Text style={styles.pickerLabel}>時</Text>
+                    <Picker
+                        selectedValue={selectedMinutes}
+                        style={styles.picker}
+                        itemStyle={styles.pickerItem}
+                        onValueChange={(itemValue) => setSelectedMinutes(itemValue)}
+                    >
+                        {[...Array(60).keys()].map((minute) => (
+                            <Picker.Item key={minute} label={`${minute}`} value={minute} />
+                        ))}
+                    </Picker>
+                    <Text style={styles.pickerLabel}>分</Text>
+                </View>
+                <TouchableOpacity style={styles.startButton} onPress={handleStart}>
+                    <Text style={styles.startButtonText}>スタート</Text>
+                </TouchableOpacity>
+            </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#fff',
     },
+    topWrap: {
+        flexDirection: 'row',
+        height: 80,
+        alignItems: 'center',
+
+    },
+    iconButton: {
+        flex: 1,
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        // borderWidth: 1,
+        padding: 10,
+    },
     title: {
-        fontSize: 24,
+        flex: 2,
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 30,
-        position: 'absolute',
-        top: 40,
-        left: 20,
+        textAlign: 'center',
+    },
+    box: {
+        width: 20,
+        height: 80,
+        flex: 1,
+    },
+    containWrap: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
     },
     pickerContainer: {
         flexDirection: 'row',
@@ -89,15 +121,19 @@ const styles = StyleSheet.create({
     },
     startButton: {
         backgroundColor: '#00BCD4',
-        paddingVertical: 15,
-        paddingHorizontal: 50,
-        borderRadius: 25,
+        borderRadius: 10,
+        width: 350,
+        height: 60,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     startButtonText: {
         color: '#FFFFFF',
         fontSize: 18,
         fontWeight: 'bold',
     },
+
 });
 
 export default TimeSettingPage;
