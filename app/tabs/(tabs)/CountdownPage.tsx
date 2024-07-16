@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { FontAwesome } from '@expo/vector-icons';
+// import Ionicons from '@expo/vector-icons/Ionicons';
+import { FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from '@/store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
 import { RootStackParamList } from '../types';
@@ -104,10 +106,10 @@ const CountdownPage: React.FC = () => {
             </View>
             <View style={styles.controls}>
                 <TouchableOpacity onPress={goBack} style={styles.iconButton}>
-                    <FontAwesome name="trash" size={25} color="#7A7A7A" />
+                    <FontAwesome name="trash" size={28} color="#7A7A7A" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handlePauseResume} style={styles.iconButton}>
-                    <FontAwesome name={isRunning ? "pause" : "play"} size={25} color="#7A7A7A" />
+                <TouchableOpacity onPress={handlePauseResume} style={[styles.iconButton, !isRunning && styles.playButton]}>
+                    <FontAwesome6 name={isRunning ? "pause" : "play"} size={24} color="#7A7A7A" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleReset} style={styles.iconButton}>
                     <FontAwesome name="refresh" size={25} color="#7A7A7A" />

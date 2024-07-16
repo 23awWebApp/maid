@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     pickerLabel: {
-        fontSize: 24,
+        fontSize: 36,
         marginHorizontal: 10,
         color: '#7a7a7a',
     },

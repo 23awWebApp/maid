@@ -56,12 +56,19 @@ const styles = StyleSheet.create({
     iconButton: {
         backgroundColor: '#fff',
         borderRadius: 50,
-        padding: 10,
-        marginHorizontal: 10,
+        width: 50,
+        height: 50,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: '#7a7a7a',
+    },
+    playButton: {
+        paddingLeft: 5,
     },
     stopButton: {
         backgroundColor: '#00BCD4',
-        borderRadius: 10,
+        borderRadius: 50,
         width: 350,
         height: 60,
         marginTop: 20,
