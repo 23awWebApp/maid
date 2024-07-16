@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
-import { FontAwesome } from '@expo/vector-icons';
-// import Ionicons from '@expo/vector-icons/Ionicons';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from '@/store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
 import { RootStackParamList } from '../types';
@@ -91,7 +89,7 @@ const CountdownPage: React.FC = () => {
                     inActiveStrokeColor={'#f0f0f05a'}
                     title={formatTime(time)}
                     titleColor={'#000'}
-                    titleStyle={{ fontFamily: 'Manrope', fontWeight: 'bold', fontSize: 48 }}
+                    titleStyle={{ fontFamily: 'Manrope', fontWeight: 'bold', fontSize: 44 }}
                 />
                 <Animated.View
                     style={[

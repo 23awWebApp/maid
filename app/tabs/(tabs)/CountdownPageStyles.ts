@@ -1,4 +1,3 @@
-import { Center } from '@gluestack-ui/themed';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -49,8 +48,8 @@ const styles = StyleSheet.create({
     },
     controls: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '60%',
+        justifyContent: 'space-evenly',
+        width: 350,
         alignItems: 'center',
     },
     iconButton: {
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         width: 350,
         height: 60,
-        marginTop: 20,
+        marginTop: 100,
         alignItems: 'center',
         justifyContent: 'center',
     },
