@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         color: "#000",
     },
     question: {
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 40,
         textAlign: "center",
     },

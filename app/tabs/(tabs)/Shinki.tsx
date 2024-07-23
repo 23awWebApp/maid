@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     heading: {
-        fontSize: 24,
+        fontSize: 20,
         marginBottom: 20,
         // flex: 1,
         alignItems: 'center',
