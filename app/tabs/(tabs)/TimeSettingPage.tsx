@@ -4,12 +4,12 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { Box } from "@gluestack-ui/themed";
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../types';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 type TimeSettingPageNavigationProp = StackNavigationProp<RootStackParamList, 'TimeSettingPage'>;
 type TimeSettingPageRouteProp = RouteProp<RootStackParamList, 'TimeSettingPage'>;
-
 
 const TimeSettingPage: React.FC = () => {
     const route = useRoute<TimeSettingPageRouteProp>();
@@ -25,7 +25,7 @@ const TimeSettingPage: React.FC = () => {
         navigation.goBack();
     };
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.topWrap}>
                 <TouchableOpacity onPress={goBack} style={styles.iconButton}>
                     <AntDesign name="left" size={25} color="#7A7A7A" />
@@ -62,7 +62,7 @@ const TimeSettingPage: React.FC = () => {
                     <Text style={styles.startButtonText}>スタート</Text>
                 </TouchableOpacity>
             </View>
-        </View >
+        </SafeAreaView>
     );
 };
 
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 80,
         alignItems: 'center',
-
     },
     iconButton: {
         flex: 1,
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
-
 });
 
 export default TimeSettingPage;

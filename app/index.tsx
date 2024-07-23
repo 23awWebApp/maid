@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link, useRouter } from 'expo-router';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function Home() {
   const router = useRouter();
@@ -14,8 +14,23 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Text>welcome to maid app!</Text>
-    </>
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to Maid App!</Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: '#ffffff',
+  },
+  text: {
+    fontSize: 24,
+    color: '#000', 
+  },
+});

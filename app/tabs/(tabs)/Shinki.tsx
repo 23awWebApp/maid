@@ -5,6 +5,7 @@ import ItemButton from "@/components/ItemButton";
 import { HStack, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import useSelectedItemStore from "@/store/useSelectedItemStore";
 import { RootStackParamList } from '../types'; // Ensure you have your types defined here
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ShinkiNavigationProp = NavigationProp<RootStackParamList, 'Shinki'>;
 
@@ -31,26 +32,24 @@ const Shinki: React.FC = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView>
-                <Text style={styles.heading}>掃除したいところは？</Text>
-                <HStack justifyContent="center" flexWrap="wrap">
-                    <ItemButton text={"へや"} onClick={() => handleItemClick("へや")} selected={selectedItems.includes("へや")} />
-                    <ItemButton text={"キッチン"} onClick={() => handleItemClick("キッチン")} selected={selectedItems.includes("キッチン")} />
-                    <ItemButton text={"洗濯"} onClick={() => handleItemClick("洗濯")} selected={selectedItems.includes("洗濯")} />
-                    <ItemButton text={"洗い物"} onClick={() => handleItemClick("洗い物")} selected={selectedItems.includes("洗い物")} />
-                    <ItemButton text={"トイレ"} onClick={() => handleItemClick("トイレ")} selected={selectedItems.includes("トイレ")} />
-                    <ItemButton text={"お風呂"} onClick={() => handleItemClick("お風呂")} selected={selectedItems.includes("お風呂")} />
-                    <ItemButton text={"洗面台"} onClick={() => handleItemClick("洗面台")} selected={selectedItems.includes("洗面台")} />
-                    <ItemButton text={"ベランダ"} onClick={() => handleItemClick("ベランダ")} selected={selectedItems.includes("ベランダ")} />
-                    <ItemButton text={"玄関"} onClick={() => handleItemClick("玄関")} selected={selectedItems.includes("玄関")} />
-                </HStack>
-                <Box mt={20} />
-                <Button style={styles.next} onPress={handleNavigateToSetting}>
-                    <ButtonText>次へ</ButtonText>
-                </Button>
-            </ScrollView>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.heading}>掃除したいところは？</Text>
+            <HStack justifyContent="center" flexWrap="wrap">
+                <ItemButton text={"へや"} onClick={() => handleItemClick("へや")} selected={selectedItems.includes("へや")} />
+                <ItemButton text={"キッチン"} onClick={() => handleItemClick("キッチン")} selected={selectedItems.includes("キッチン")} />
+                <ItemButton text={"洗濯"} onClick={() => handleItemClick("洗濯")} selected={selectedItems.includes("洗濯")} />
+                <ItemButton text={"洗い物"} onClick={() => handleItemClick("洗い物")} selected={selectedItems.includes("洗い物")} />
+                <ItemButton text={"トイレ"} onClick={() => handleItemClick("トイレ")} selected={selectedItems.includes("トイレ")} />
+                <ItemButton text={"お風呂"} onClick={() => handleItemClick("お風呂")} selected={selectedItems.includes("お風呂")} />
+                <ItemButton text={"洗面台"} onClick={() => handleItemClick("洗面台")} selected={selectedItems.includes("洗面台")} />
+                <ItemButton text={"ベランダ"} onClick={() => handleItemClick("ベランダ")} selected={selectedItems.includes("ベランダ")} />
+                <ItemButton text={"玄関"} onClick={() => handleItemClick("玄関")} selected={selectedItems.includes("玄関")} />
+            </HStack>
+            <Box mt={20} />
+            <Button style={styles.next} onPress={handleNavigateToSetting}>
+                <ButtonText>次へ</ButtonText>
+            </Button>
+        </SafeAreaView>
     );
 };
 
@@ -66,9 +65,9 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         marginBottom: 20,
-        flex:1,
+        // flex: 1,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
     },
     next: {
         width: "80%",

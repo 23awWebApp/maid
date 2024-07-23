@@ -14,7 +14,7 @@ const ItemButton: React.FC<ItemButtonProps> = ({ text, selected, onClick }) => {
             width={150}
             height={50}
             justifyContent='center'
-            m="$5"
+            m="$4"
             borderWidth={selected ? "$2" : "$1"}
             rounded="$sm"
             borderColor={selected ? "#00A9C3" : "#B0E0E6"}
