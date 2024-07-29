@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Box, Text, Center, Spinner } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../types'; // Update the path according to your project structure
 
 const LoadingScreen: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         const timer = setTimeout(() => {

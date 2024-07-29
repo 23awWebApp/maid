@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import logoIcon from '../assets/images/AppIcon.png';
+
+const logoIcon = require('../assets/images/AppIcon.png');
 
 export default function Home() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function Home() {
       router.push('/tabs/MainPage');
     }, 5000);
 
-    return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+    return () => clearTimeout(timer); // Cleanup the timer
   }, [router]);
 
   return (
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   logo: {
-    width: 100, // Adjust the size according to your requirements
-    height: 100, // Adjust the size according to your requirements
+    width: 100,
+    height: 100,
     marginBottom: 20,
   },
   text: {
