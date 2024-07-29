@@ -14,6 +14,7 @@ export default function AppLayout() {
     { name: "MainPage", headerShown: false },
     { name: "ShinkiSetting", headerShown: false },
     { name: "LoadingScreen", headerShown: false },
+    { name: "LoadingScreen2", headerShown: false },
     { name: "TimeSettingPage", headerShown: false },
     { name: "CountdownPage", headerShown: false },
   ];

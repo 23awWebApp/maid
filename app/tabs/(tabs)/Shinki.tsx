@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import ItemButton from "@/components/ItemButton";
+import ItemButton from "../../../components/ItemButton";
 import { HStack, Box, Button, ButtonText } from "@gluestack-ui/themed";
-import useSelectedItemStore from "@/store/useSelectedItemStore";
+import useSelectedItemStore from "../../../store/useSelectedItemStore";
 import { RootStackParamList } from '../types'; // Ensure you have your types defined here
 import { SafeAreaView } from 'react-native-safe-area-context';
 

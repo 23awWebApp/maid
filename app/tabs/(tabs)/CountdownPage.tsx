@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
-import useSelectedItemStore from '@/store/useSelectedItemStore';
+import useSelectedItemStore from '../../../store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
 import { RootStackParamList } from '../types';
 
@@ -53,8 +53,8 @@ const CountdownPage: React.FC = () => {
     const handleStop = () => {
         // Update the cleaning time for the item
         updateCleaningTime(item);
-        // Navigate back to the MainPage
-        navigation.navigate('MainPage' as never);
+        // Navigate to
+        navigation.navigate('LoadingScreen2' as never);
     };
 
     const goBack = () => {

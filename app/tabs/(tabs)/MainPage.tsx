@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
-import useSelectedItemStore from "@/store/useSelectedItemStore";
+import useSelectedItemStore from "../../../store/useSelectedItemStore";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from './MainPageStyles';
 import { RootStackParamList } from '../types';

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Select, Icon, Button, ButtonText, ChevronDownIcon } from "@gluestack-ui/themed";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
-import useSelectedItemStore from "@/store/useSelectedItemStore";
-import { RootStackParamList } from "../types"; 
+import useSelectedItemStore from "../../../store/useSelectedItemStore";
+import { RootStackParamList } from "../types";
 type ShinkiSettingNavigationProp = NavigationProp<RootStackParamList, 'ShinkiSetting'>;
 
 const ShinkiSetting: React.FC = () => {
@@ -31,7 +31,7 @@ const ShinkiSetting: React.FC = () => {
     const handleNext = () => {
         const allSelected = Object.values(daysMap).every((day) => day !== null);
         if (allSelected) {
-            navigation.navigate("MainPage");
+            navigation.navigate("LoadingScreen");
         } else {
             const nextTab = selectedItems.find((item) => daysMap[item] === null);
             if (nextTab) {

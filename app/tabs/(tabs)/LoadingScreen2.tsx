@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Box, Text, Center, Spinner } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 
-const LoadingScreen: React.FC = () => {
+const LoadingScreen2: React.FC = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -18,9 +18,8 @@ const LoadingScreen: React.FC = () => {
         <Center flex={1} bg="#B0E0E6">
             <Box style={styles.card}>
                 <Box style={styles.innerCard}>
-                    <Text style={styles.mainText}>あなたの掃除メイトを呼んでいます！</Text>
                     <Spinner size="large" color="#0891B2" />
-                    <Text style={styles.subText}>少々お待ちください</Text>
+                    <Text style={styles.mainText}>今日の掃除もお疲れ様でした〜！</Text>
                 </Box>
             </Box>
         </Center>
@@ -60,12 +59,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#000',
     },
-    subText: {
-        fontSize: 16,
-        marginTop: 25,
-        textAlign: 'center',
-        color: '#969696',
-    },
 });
 
-export default LoadingScreen;
+export default LoadingScreen2;

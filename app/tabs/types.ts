@@ -5,4 +5,6 @@ export type RootStackParamList = {
     Settings: undefined;
     ShinkiSetting: undefined;
     Shinki: undefined;
+    LoadingScreen: undefined;
+    LoadingScreen2: undefined;
 };
