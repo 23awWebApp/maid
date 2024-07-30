@@ -9,8 +9,8 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/tabs/MainPage');
-    }, 5000);
+      router.push('/tabs/MainPage' as never);
+    }, 3000);
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [router]);

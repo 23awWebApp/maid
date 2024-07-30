@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
 import useSelectedItemStore from '../../../store/useSelectedItemStore';
 import styles from './CountdownPageStyles';
 import { RootStackParamList } from '../types';
@@ -27,6 +28,7 @@ const CountdownPage: React.FC = () => {
             }, 1000);
         } else if (time === 0) {
             setIsRunning(false);
+            playSound(); // Play the sound when the countdown reaches zero
         }
 
         // Update progress animation
@@ -39,6 +41,11 @@ const CountdownPage: React.FC = () => {
 
         return () => clearInterval(timer);
     }, [isRunning, time]);
+
+    const playSound = async () => {
+        const { sound } = await Audio.Sound.createAsync(require('../../../assets/sound/2607.mp3'));
+        await sound.playAsync();
+    };
 
     const handlePauseResume = () => {
         setIsRunning(!isRunning);
