@@ -19,7 +19,8 @@
     "app/**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "declarations.d.ts"
+    "declarations.d.ts",
+    "components/CustomModal.tsx"
   ],
   "exclude": [
     "node_modules",

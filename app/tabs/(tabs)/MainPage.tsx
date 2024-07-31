@@ -7,7 +7,7 @@ import styles from './MainPageStyles';
 import { RootStackParamList } from '../types';
 import { Card, Box } from "@gluestack-ui/themed";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import CustomModal from './CustomModal';
+import CustomModal from '../../../components/CustomModal';
 
 type MainPageNavigationProp = NavigationProp<RootStackParamList, 'MainPage'>;
 
