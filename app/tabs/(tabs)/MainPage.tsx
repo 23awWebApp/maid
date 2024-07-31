@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import useSelectedItemStore from "../../../store/useSelectedItemStore";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from './MainPageStyles';
 import { RootStackParamList } from '../types';
-import { Card, Box } from "@gluestack-ui/themed";
-import AntDesign from '@expo/vector-icons/AntDesign';
 import CustomModal from '../../../components/CustomModal';
+import CardItem from '../../../components/CardItem'; // Import the CardItem component
+import { Box } from "@gluestack-ui/themed"; // Ensure this import is added
 
 type MainPageNavigationProp = NavigationProp<RootStackParamList, 'MainPage'>;
 
@@ -99,43 +99,27 @@ const MainPage: React.FC = () => {
         </TouchableOpacity>
       </Box>
       <View style={styles.whiteBox}>
-        <ScrollView contentContainerStyle={styles.content}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {selectedItems.map((item, index) => (
             index % 2 === 0 && (
               <View key={index} style={styles.row}>
-                <TouchableOpacity onPress={() => handleCardPress(item)}>
-                  <Card style={styles.card}>
-                    {deleteMode && (
-                      <TouchableOpacity
-                        style={styles.deleteIcon}
-                        onPress={() => handleDeleteItem(item)}
-                      >
-                        <AntDesign name="minuscircle" size={24} color="#F44F4F" />
-                      </TouchableOpacity>
-                    )}
-                    <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
-                    <Image source={itemImages[item]} style={styles.cardImage} />
-                    <Text style={styles.cardTitle}>{item}</Text>
-                    <Text style={styles.cardSubtitle}>{daysMap[item] ? `${daysMap[item]}日前 掃除しました` : '未設定'}</Text>
-                  </Card>
-                </TouchableOpacity>
+                <CardItem
+                  item={item}
+                  daysMap={daysMap}
+                  deleteMode={deleteMode}
+                  itemImage={itemImages[item]}
+                  handleCardPress={handleCardPress}
+                  handleDeleteItem={handleDeleteItem}
+                />
                 {selectedItems[index + 1] && (
-                  <TouchableOpacity onPress={() => handleCardPress(selectedItems[index + 1])}>
-                    <Card style={styles.card}>
-                      {deleteMode && (
-                        <TouchableOpacity
-                          style={styles.deleteIcon}
-                          onPress={() => handleDeleteItem(selectedItems[index + 1])}
-                        >
-                          <AntDesign name="minuscircle" size={24} color="#F44F4F" />
-                        </TouchableOpacity>
-                      )}
-                      <Box style={styles.cardIcon}><FontAwesome name="chevron-right" size={16} color="#404040" /></Box>
-                      <Image source={itemImages[selectedItems[index + 1]]} style={styles.cardImage} />
-                      <Text style={styles.cardTitle}>{selectedItems[index + 1]}</Text>
-                      <Text style={styles.cardSubtitle}>{daysMap[selectedItems[index + 1]] ? `${daysMap[selectedItems[index + 1]]}日前 掃除しました` : '未設定'}</Text>
-                    </Card>
-                  </TouchableOpacity>
+                  <CardItem
+                    item={selectedItems[index + 1]}
+                    daysMap={daysMap}
+                    deleteMode={deleteMode}
+                    itemImage={itemImages[selectedItems[index + 1]]}
+                    handleCardPress={handleCardPress}
+                    handleDeleteItem={handleDeleteItem}
+                  />
                 )}
               </View>
             )
@@ -143,7 +127,6 @@ const MainPage: React.FC = () => {
           <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Shinki' as never)}>
             <FontAwesome6 name="circle-plus" size={36} color="#0891B2" />
           </TouchableOpacity>
-          <Box style={styles.box} />
         </ScrollView>
       </View>
       <CustomModal
@@ -152,7 +135,7 @@ const MainPage: React.FC = () => {
         onCancel={cancelDeleteItem}
         onConfirm={confirmDeleteItem}
       />
-    </View >
+    </View>
   );
 };
 

@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -26,13 +28,10 @@ export default StyleSheet.create({
     padding: 8,
     zIndex: 99,
   },
-
   whiteBox: {
     flex: 1,
     width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    paddingBottom: 0,
+    padding: 5,
     backgroundColor: '#fff',
     borderRadius: 15,
     shadowColor: '#000',
@@ -42,7 +41,13 @@ export default StyleSheet.create({
     elevation: 2,
     zIndex: 1,
   },
-
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 60,
+    paddingHorizontal: 0,
+  },
   content: {
     flex: 1,
     padding: 0,
@@ -52,50 +57,8 @@ export default StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginBottom: 20,
-  },
-  card: {
-    maxWidth: 170,
-    height: 196,
-    padding: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  deleteIcon: {
-    zIndex: 99,
-    position: 'absolute',
-    top: -5,
-    left: -5,
-  },
-  cardChevronRight: {
-    fontSize: 22,
-    color: '#00bcd4',
-  },
-  cardIcon: {
-    width: "100%",
-    alignItems: 'flex-end',
-  },
-  cardImage: {
-    width: 64,
-    height: 64,
-    resizeMode: 'contain',
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 8,
-  },
-  cardSubtitle: {
-    fontSize: 14,
-    color: '#777',
-    marginTop: 4,
+    margin: 10,
+    gap: 20,
   },
   addButton: {
     width: 100,
@@ -114,9 +77,4 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: 16,
   },
-  box: {
-    width: 64,
-    height: 64,
-  },
 });
-
